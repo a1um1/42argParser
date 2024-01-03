@@ -1,0 +1,22 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"kube.42header",
+				"MariusvanWijk-JoppeKoers.codam-norminette-3",
+				"DoKca.42-ft-count-line",
+				"Catppuccin.catppuccin-vsc",
+				"thang-nm.catppuccin-perfect-icons",
+				"llvm-vs-code-extensions.vscode-clangd",
+				"vadimcn.vscode-lldb"
+			]
+		},
+		"codespaces": {
+			"openFiles": [
+				"main.c"
+			]
+		  }
+	},
+	"build": { "dockerfile": "Dockerfile" }
+}
