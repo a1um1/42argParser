@@ -6,7 +6,7 @@
 /*   By: 4242 <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:15:42 by 4242              #+#    #+#             */
-/*   Updated: 2024/01/04 09:27:29 by 4242             ###   ########.fr       */
+/*   Updated: 2024/01/04 12:39:55 by 4242             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*arg_getstr(char **arg, char **input)
 	tag.bquote = 0;
 	while (**input != '\0')
 	{
-		if (isspace (**input) && !tag.squote && !tag.dquote && !tag.bquote)
+		if (ft_isspace(**input) && !tag.squote && !tag.dquote && !tag.bquote)
 			break ;
 		else
 		{
@@ -84,6 +84,8 @@ t_argv	*arg_opertate(char *input, char *copybuf,
 		arg_getstr(&arg, &input);
 		*arg = '\0';
 		lst_copy->val = ft_strdup(copybuf);
+		if (*input == '\0')
+			break ;
 		if (!ft_create_list(&(lst_copy->nxt)))
 			return (ft_free_list(lst_argv, copybuf));
 		lst_copy = lst_copy->nxt;

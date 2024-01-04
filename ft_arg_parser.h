@@ -6,7 +6,7 @@
 /*   By: 4242 <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 05:14:22 by 4242              #+#    #+#             */
-/*   Updated: 2024/01/04 09:27:11 by 4242             ###   ########.fr       */
+/*   Updated: 2024/01/04 12:35:16 by 4242             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ t_argv	*ft_create_list(t_argv **argv);
 void	*ft_free_list(t_argv *argv, char *buf);
 size_t	ft_strlen(char *str);
 char	*ft_strdup(char *str);
+char	ft_isspace(char c);
 #endif
