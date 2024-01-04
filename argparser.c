@@ -6,7 +6,7 @@
 /*   By: 4242 <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 03:15:42 by 4242              #+#    #+#             */
-/*   Updated: 2024/01/04 09:07:33 by 4242             ###   ########.fr       */
+/*   Updated: 2024/01/04 09:27:29 by 4242             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	arg_check(char **arg, char **input, t_arg_tag *tag)
 			*(*arg)++ = **input;
 	}
 }
+
 char	*arg_getstr(char **arg, char **input)
 {
 	t_arg_tag	tag;
@@ -67,22 +68,11 @@ char	*arg_getstr(char **arg, char **input)
 	return (*arg);
 }
 
-t_argv	*arg_parser(char *input)
+t_argv	*arg_opertate(char *input, char *copybuf,
+						t_argv *lst_argv, t_argv *lst_copy)
 {
 	char	*arg;
-	char	*copybuf;
-	t_argv	*lst_argv;
-	t_argv	*lst_copy;
 
-	if (input == NULL)
-		return (NULL);
-	copybuf = malloc((ft_strlen(input) + 1) * sizeof(char));
-	if (!copybuf)
-		return (NULL);
-	lst_argv = NULL;
-	if (!ft_create_list(&lst_argv))
-		return (ft_free_list(NULL));
-	lst_copy = lst_argv;
 	while (*input != '\0')
 	{
 		input = ft_strtrim(input);
@@ -90,14 +80,32 @@ t_argv	*arg_parser(char *input)
 			break ;
 		arg = copybuf;
 		if (!ft_create_list(&lst_copy))
-			return (ft_free_list(lst_argv));
+			return (ft_free_list(lst_argv, copybuf));
 		arg_getstr(&arg, &input);
 		*arg = '\0';
 		lst_copy->val = ft_strdup(copybuf);
 		if (!ft_create_list(&(lst_copy->nxt)))
-			return (ft_free_list(lst_argv));
+			return (ft_free_list(lst_argv, copybuf));
 		lst_copy = lst_copy->nxt;
 	}
 	free(copybuf);
 	return (lst_argv);
+}
+
+t_argv	*arg_parser(char *input)
+{
+	char	*copybuf;
+	t_argv	*lst_argv;
+	t_argv	*lst_copy;
+
+	if (input == NULL)
+		return (NULL);
+	lst_argv = NULL;
+	if (!ft_create_list(&lst_argv))
+		return (ft_free_list(NULL, NULL));
+	lst_copy = lst_argv;
+	copybuf = malloc((ft_strlen(input) + 1) * sizeof(char));
+	if (!copybuf)
+		return (NULL);
+	return (arg_opertate(input, copybuf, lst_argv, lst_copy));
 }
